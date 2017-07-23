@@ -34,7 +34,7 @@ func _fixed_process(delta):
 		velocity = velocity.normalized() * speed * delta
 		
 		# If the player can dash, give it a velocity boost and set it to dashing mode
-		if (Input.is_action_pressed("dash") and not dashing and dashTimer >= DASH_CD):
+		if Input.is_action_pressed("dash") and not dashing and dashTimer >= DASH_CD:
 			dashing = true
 			dashTimer = 0
 			velocity *= DASH_BOOST
