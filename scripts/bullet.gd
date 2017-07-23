@@ -1,13 +1,10 @@
 extends KinematicBody2D
 
-var lifeTime = 2 # Time after which the bullet disappears in seconds
-var bounces = false # If true, will bounce on collision with environment instead of exploding
+var bounces # If true, will bounce on collision with environment instead of exploding
 var velocity
 
 func _ready():
-	set_fixed_process(true)
-	get_node("timer").set_wait_time(lifeTime)
-	get_node("timer").start()
+	pass
 	
 func _fixed_process(delta):
 	move(velocity * delta)
@@ -24,8 +21,13 @@ func _fixed_process(delta):
 func _on_timer_timeout():
 	queue_free()
 
-# Utility function to initialize the projectile's variables
-func initialize(direction, speed, _lifeTime = 2, _bounces = false):
-	lifeTime = _lifeTime
+# Utility function to initialize the projectile, setting its velocity and starting the timer
+func initialize(position, direction, speed, lifeTime = 2, _bounces = false):
 	bounces = _bounces
+	set_pos(position)
 	velocity = direction.normalized() * speed
+	# Start the timer after which the bullet is destroyed
+	get_node("timer").set_wait_time(lifeTime)
+	get_node("timer").start()
+	set_fixed_process(true)
+	
