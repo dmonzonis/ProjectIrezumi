@@ -1,0 +1,49 @@
+[gd_scene load_steps=4 format=1]
+
+[ext_resource path="res://resources/grass_tile.png" type="Texture" id=1]
+
+[sub_resource type="AtlasTexture" id=1]
+
+region = Rect2( 0, 0, 80, 80 )
+margin = Rect2( 0, 0, 0, 0 )
+
+[sub_resource type="ConvexPolygonShape2D" id=2]
+
+custom_solver_bias = 0.0
+points = Vector2Array( -40, -40, 40, -40, 40, 40, -40, 40, -40, -40 )
+
+[node name="Node" type="Node"]
+
+[node name="grass_tile" type="Sprite" parent="."]
+
+transform/pos = Vector2( 40, 40 )
+texture = ExtResource( 1 )
+region = true
+region_rect = Rect2( 0, 0, 80, 80 )
+
+[node name="path_block" type="Sprite" parent="."]
+
+transform/pos = Vector2( 160, 40 )
+texture = SubResource( 1 )
+
+[node name="StaticBody2D" type="StaticBody2D" parent="path_block"]
+
+input/pickable = false
+shapes/0/shape = SubResource( 2 )
+shapes/0/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
+shapes/0/trigger = false
+collision/layers = 1
+collision/mask = 1
+constant_linear_velocity = Vector2( 0, 0 )
+constant_angular_velocity = 0.0
+friction = 1.0
+bounce = 0.0
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="path_block/StaticBody2D"]
+
+build_mode = 0
+polygon = Vector2Array( -40, -40, 40, -40, 40, 40, -40, 40, -40, -40 )
+shape_range = Vector2( 0, 0 )
+trigger = false
+
+
