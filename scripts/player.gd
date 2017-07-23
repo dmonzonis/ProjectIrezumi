@@ -35,7 +35,7 @@ func _fixed_process(delta):
 		if (Input.is_action_pressed("dash") and not dashing and dashTimer >= DASH_CD):
 			dashing = true
 			dashTimer = 0
-			velocity = velocity.normalized() * speed * delta * DASH_BOOST
+			velocity *= DASH_BOOST
 		elif dashTimer < DASH_CD:
 			dashTimer += delta
 	move(velocity)
