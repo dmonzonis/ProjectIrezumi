@@ -1,12 +1,10 @@
 extends KinematicBody2D
 
-var character
 export var speed = 300
 var velocity = Vector2()
 
 func _ready():
 	set_fixed_process(true)
-	character = get_node("character")
 	
 func _fixed_process(delta):
 	velocity = Vector2(0, 0)
