@@ -10,6 +10,7 @@ const MELEE_CD = 0.2 # Cooldown in seconds for the melee attacking
 
 export var speed = 300 # Normal movement speed in pixels/s
 export var maxHealth = 10 # Maximum health
+export var melee_damage = 1
 var health
 var velocity = Vector2()
 var dashTimer = DASH_CD
@@ -62,7 +63,7 @@ func _fixed_process(delta):
 		elif attacking:
 			for target in targetsInRange:
 				if target.is_in_group("Enemy"):
-					print("Enemy hit!")
+					target.call("damage", melee_damage)
 			attacking = false
 			attackTimer = 0
 		else:

@@ -29,9 +29,12 @@ script/script = ExtResource( 2 )
 [node name="player" parent="map" instance=ExtResource( 3 )]
 
 transform/pos = Vector2( 412.193, 284.318 )
+maxHealth = 10
+melee_damage = 1
 
 [node name="enemy" parent="map" instance=ExtResource( 4 )]
 
 transform/pos = Vector2( 556.108, 439.298 )
+maxHealth = 5
 
 
