@@ -9,6 +9,8 @@ const MELEE_OFFSET = 60 # Distance of the melee collider with the attacker
 const MELEE_CD = 0.2 # Cooldown in seconds for the melee attacking
 
 export var speed = 300 # Normal movement speed in pixels/s
+export var maxHealth = 10 # Maximum health
+var health
 var velocity = Vector2()
 var dashTimer = DASH_CD
 var dashing = false
@@ -17,6 +19,7 @@ var attackTimer = MELEE_CD
 var targetsInRange = []
 
 func _ready():
+	health = maxHealth
 	set_fixed_process(true)
 	
 func _fixed_process(delta):
@@ -66,6 +69,14 @@ func _fixed_process(delta):
 			attackTimer += delta
 			
 	move(velocity)
+
+func damage(amount):
+	health -= amount
+	if health <= 0:
+		# Die
+		queue_free()
+	elif health > maxHealth:
+		health = maxHealth
 
 func _on_attackArea_body_enter(body):
 	targetsInRange.append(body)
