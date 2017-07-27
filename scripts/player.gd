@@ -66,7 +66,7 @@ func _fixed_process(delta):
 					target.call("damage", melee_damage)
 			attacking = false
 			attackTimer = 0
-		else:
+		elif attackTimer < MELEE_CD:
 			attackTimer += delta
 			
 	move(velocity)
