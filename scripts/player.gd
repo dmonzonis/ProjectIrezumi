@@ -5,7 +5,7 @@ const DASH_BOOST = 4 # Speed multiplier for the initial dash speed
 const DASH_DECAY = 1.15 # Rate at which the velocity decays after dashing
 const DASH_THRESHOLD = 1 # Speed at which the dash is considered over
 
-const MELEE_OFFSET = 50 # Distance of the melee collider with the attacker
+const MELEE_OFFSET = 60 # Distance of the melee collider with the attacker
 const MELEE_CD = 0.2 # Cooldown in seconds for the melee attacking
 
 export var speed = 300 # Normal movement speed in pixels/s
