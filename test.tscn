@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=1]
+[gd_scene load_steps=5 format=1]
 
 [ext_resource path="res://tileset.tres" type="TileSet" id=1]
 [ext_resource path="res://scripts/test.gd" type="Script" id=2]
 [ext_resource path="res://player.tscn" type="PackedScene" id=3]
+[ext_resource path="res://enemy.tscn" type="PackedScene" id=4]
 
 [node name="world" type="Node"]
 
@@ -28,5 +29,9 @@ script/script = ExtResource( 2 )
 [node name="player" parent="map" instance=ExtResource( 3 )]
 
 transform/pos = Vector2( 412.193, 284.318 )
+
+[node name="enemy" parent="map" instance=ExtResource( 4 )]
+
+transform/pos = Vector2( 556.108, 439.298 )
 
 
