@@ -51,24 +51,24 @@ func _fixed_process(delta):
 		elif dashTimer < DASH_CD:
 			dashTimer += delta
 			
-		# If the player is attacking, move the attack collider using the position of the mouse and
-		# set it to attacking mode. In attacking mode, it will get all targets which are in the
-		# attack collision area and deal the appropriate damage. This has to be done one frame after
-		# having moved the attack collider so all bodies entering after the movement are registered
-		# correctly. After the attack, send the attacking to cooldown.
-		if Input.is_action_pressed("attack") and not attacking and attackTimer >= MELEE_CD:
-			var direction = (get_global_mouse_pos() - get_pos()).normalized()
-			get_node("attackArea").set_pos(direction * MELEE_OFFSET)
-			attacking = true
-		elif attacking:
-			for target in targetsInRange:
-				if target.is_in_group("Enemy"):
-					target.call("damage", melee_damage)
-			attacking = false
-			attackTimer = 0
-		elif attackTimer < MELEE_CD:
-			attackTimer += delta
-			
+	# If the player is attacking, move the attack collider using the position of the mouse and
+	# set it to attacking mode. In attacking mode, it will get all targets which are in the
+	# attack collision area and deal the appropriate damage. This has to be done one frame after
+	# having moved the attack collider so all bodies entering after the movement are registered
+	# correctly. After the attack, send the attacking to cooldown.
+	if Input.is_action_pressed("attack") and not attacking and attackTimer >= MELEE_CD:
+		var direction = (get_global_mouse_pos() - get_pos()).normalized()
+		get_node("attackArea").set_pos(direction * MELEE_OFFSET)
+		attacking = true
+	elif attacking:
+		for target in targetsInRange:
+			if target.is_in_group("Enemy"):
+				target.call("damage", melee_damage)
+		attacking = false
+		attackTimer = 0
+	elif attackTimer < MELEE_CD:
+		attackTimer += delta
+		
 	# Check for collisions against enemies
 	if is_colliding():
 		var other = get_collider()
