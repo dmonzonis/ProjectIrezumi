@@ -69,13 +69,19 @@ func _fixed_process(delta):
 		elif attackTimer < MELEE_CD:
 			attackTimer += delta
 			
+	# Check for collisions against enemies
+	if is_colliding():
+		var other = get_collider()
+		if other.is_in_group("Enemy"):
+			damage(1)	
+			
 	move(velocity)
 
 func damage(amount):
 	health -= amount
 	if health <= 0:
 		# Die
-		queue_free()
+		print("Dead")
 	elif health > maxHealth:
 		health = maxHealth
 

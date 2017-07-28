@@ -10,9 +10,17 @@ func _ready():
 	set_fixed_process(true)
 	
 func _fixed_process(delta):
+	# Follow player
 	var player = get_parent().get_node("player")
 	var direction = (player.get_pos() - get_pos()).normalized()
 	var velocity = direction * speed * delta
+	
+	# Check collisions and damage player if colliding with it
+	if is_colliding():
+		var other = get_collider()
+		if other == player:
+			player.call("damage", 1)
+			
 	move(velocity)
 	
 func damage(amount):
