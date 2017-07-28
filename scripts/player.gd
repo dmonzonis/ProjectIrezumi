@@ -8,6 +8,8 @@ const DASH_THRESHOLD = 1 # Speed at which the dash is considered over
 const MELEE_OFFSET = 60 # Distance of the melee collider with the attacker
 const MELEE_CD = 0.2 # Cooldown in seconds for the melee attacking
 
+const INVINCIBILITY_TIME = 1 # Time in seconds the player will be invincible for after being damaged
+
 export var speed = 300 # Normal movement speed in pixels/s
 export var maxHealth = 10 # Maximum health
 export var meleeDamage = 1
@@ -17,6 +19,7 @@ var dashTimer = DASH_CD
 var dashing = false
 var attacking = true
 var attackTimer = MELEE_CD
+var invincibilityTimer = INVINCIBILITY_TIME
 var targetsInRange = []
 
 func _ready():
@@ -79,10 +82,16 @@ func _fixed_process(delta):
 			damage(other.damageValue)
 			other.queue_free()
 			
+	# Update invincibility timer
+	if invincibilityTimer < INVINCIBILITY_TIME:
+		invincibilityTimer += delta
+			
 	move(velocity)
 
 func damage(amount):
-	health -= amount
+	if invincibilityTimer >= INVINCIBILITY_TIME:
+		health -= amount
+		invincibilityTimer = 0
 	if health <= 0:
 		# Die
 		print("Dead")
