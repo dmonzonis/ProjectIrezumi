@@ -2,6 +2,7 @@ extends KinematicBody2D
 
 export var maxHealth = 5
 export var speed = 200
+export var damageValue = 1
 var health
 
 func _ready():
